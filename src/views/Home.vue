@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
     <div v-for="item in items" :key="item.id">
       {{ item.title }}
     </div>
