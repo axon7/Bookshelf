@@ -1,26 +1,37 @@
 <template>
   <div class="home">
-    <div v-for="item in items" :key="item.id">
-      {{ item.title }}
-    </div>
+    <Search :method="search" />
+    <BookList :books="books" />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-// import HelloWorld from "@/components/HelloWorld.vue";
+import Search from "@/components/Search.vue";
+import BookList from "@/components/BookList.vue";
 import axios from "axios";
 export default {
   name: "Home",
-  components: {},
+  components: { Search, BookList },
   data() {
     return {
-      items: [],
+      books: [],
     };
   },
-  async created() {
-    let data = await axios.get("https://jsonplaceholder.typicode.com/posts");
-    this.items = data.data;
+  methods: {
+    search(searchTerm) {
+      console.log("searching");
+
+      let data = axios
+        .get(
+          `https://www.googleapis.com/books/v1/volumes?q=intitle:${searchTerm}&orderBy=newest&maxResults=10`
+        )
+        .then((response) => {
+          console.log(response.data.items);
+          this.books = response.data.items;
+          this.loadState = "success";
+        });
+      this.items = data.data;
+    },
   },
 };
 </script>
