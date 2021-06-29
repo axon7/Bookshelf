@@ -1,8 +1,12 @@
 <template>
   <div v-if="books.length > 0">
-    <div v-for="book in books" :key="book.id">
+    <router-link
+      :to="{ name: 'BookView', params: { id: book.id } }"
+      v-for="book in books"
+      :key="book.id"
+    >
       {{ book.volumeInfo.title }}
-    </div>
+    </router-link>
   </div>
 </template>
 
