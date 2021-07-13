@@ -7,7 +7,10 @@
       :key="book.id"
     >
       <img :src="book.volumeInfo.imageLinks.thumbnail" />
-      {{ book.volumeInfo.title }}
+      <div class="book-info">
+        <p class="title">{{ book.volumeInfo.title }}</p>
+        <p class="description">{{ book.volumeInfo.description }}</p>
+      </div>
     </router-link>
   </div>
 </template>
@@ -34,10 +37,33 @@ export default {
 
 .book-card {
   display: flex;
-  align-items: center;
-  background-color: grey;
-  margin-bottom: 20px;
-  border-radius: 4px;
+  align-items: flex-start;
   min-height: 125px;
+  margin-bottom: 20px;
+  padding: 12px;
+  border: 1px solid rgb(228, 229, 233);
+  border-radius: 4px;
+  text-decoration: none;
+  color: black;
+}
+
+.book-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 20px;
+}
+
+.title {
+  text-align: left;
+}
+
+.description {
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
 }
 </style>
