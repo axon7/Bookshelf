@@ -9,6 +9,15 @@
       <img :src="book.volumeInfo.imageLinks.thumbnail" />
       <div class="book-info">
         <p class="title">{{ book.volumeInfo.title }}</p>
+        <div>
+          <span
+            class="author"
+            v-for="author in book.volumeInfo.authors"
+            :key="author"
+          >
+            {{ author }}
+          </span>
+        </div>
         <p class="description">{{ book.volumeInfo.description }}</p>
       </div>
     </router-link>
@@ -56,6 +65,8 @@ export default {
 
 .title {
   text-align: left;
+  font-weight: bold;
+  margin-bottom: 5px;
 }
 
 .description {
@@ -65,5 +76,11 @@ export default {
   display: -webkit-box;
   -webkit-line-clamp: 6;
   -webkit-box-orient: vertical;
+}
+
+.author {
+  margin-right: 20px;
+
+  font-size: 14px;
 }
 </style>
