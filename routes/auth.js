@@ -52,7 +52,7 @@ router.post("/register", async (req, res) => {
 
 router.post("/login", async (req, res) => {
   try {
-    res.send("działa GET /");
+    res.send("dziala post login");
   } catch (err) {
     console.error("dupa");
     res.send(500).send("server error");
