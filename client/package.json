@@ -32,22 +32,6 @@
     "sass-loader": "^10.2.0",
     "typescript": "~4.1.5"
   },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/vue3-essential",
-      "eslint:recommended",
-      "@vue/typescript",
-      "plugin:import/typescript"
-    ],
-    "parserOptions": {
-      "parser": "@typescript-eslint/parser"
-    },
-    "rules": {}
-  },
   "browserslist": [
     "> 1%",
     "last 2 versions",
