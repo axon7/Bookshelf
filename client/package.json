@@ -26,6 +26,7 @@
     "@vue/eslint-config-typescript": "^7.0.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
+    "eslint-plugin-import": "^2.24.0",
     "eslint-plugin-vue": "^7.0.0",
     "node-sass": "^6.0.1",
     "sass-loader": "^10.2.0",
@@ -39,7 +40,8 @@
     "extends": [
       "plugin:vue/vue3-essential",
       "eslint:recommended",
-      "@vue/typescript"
+      "@vue/typescript",
+      "plugin:import/typescript"
     ],
     "parserOptions": {
       "parser": "@typescript-eslint/parser"
