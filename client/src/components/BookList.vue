@@ -6,7 +6,7 @@
       v-for="book in books"
       :key="book.id"
     >
-      <img :src="book.volumeInfo.imageLinks.thumbnail" />
+      <img :src="book.volumeInfo.imageLinks?.thumbnail" />
       <div class="book-info">
         <p class="title">{{ book.volumeInfo.title }}</p>
         <div>
