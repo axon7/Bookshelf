@@ -52,10 +52,47 @@ router.post("/register", async (req, res) => {
 
 router.post("/login", async (req, res) => {
   try {
-    res.send("dziala post login");
+    const email = req.body.email;
+    const password = req.body.password;
+    const user = await User.findOne({
+      email: req.body.email,
+    });
+
+    if (!user) {
+      return res
+        .status(401)
+        .json({ error: "Login failed! Check authentication credentials" });
+    }
+
+    console.log(user);
+
+    const isPasswordMatching = await bcrypt.compare(password, user.password);
+    if (!isPasswordMatching) {
+      return res.status(401).json({ error: "Password not matching" });
+    } else {
+      const payload = {
+        id: user._id,
+        username: user.username,
+        email: user.email,
+      };
+
+      jwt.sign(
+        payload,
+        process.env.JWT_SECRET,
+        { expiresIn: "36000" },
+        (err, token) => {
+          if (err) throw err;
+          res.status(200).json({
+            success: true,
+            token: `Bearer ${token}`,
+            user: user,
+            msg: "Congratulations! You are now logged in.",
+          });
+        }
+      );
+    }
   } catch (err) {
-    console.error("dupa");
-    res.send(500).send("server error");
+    res.status(400).json({ err: err });
   }
 });
 
