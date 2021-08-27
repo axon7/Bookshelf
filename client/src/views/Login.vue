@@ -3,8 +3,8 @@
     <h3>Login page</h3>
     <form @submit.prevent="handleLogin">
       <div class="form-group">
-        <label for="username">Username</label>
-        <input type="text" v-model="username" name="username" class="" />
+        <label for="email">Email</label>
+        <input type="text" v-model="email" name="email" class="" />
       </div>
       <div class="form-group">
         <label htmlFor="password">Password</label>
@@ -26,14 +26,18 @@ export default {
   data() {
     return {
       password: "",
-      username: "",
+      email: "",
     };
   },
   methods: {
     handleLogin() {
       console.log(this.password);
-      console.log(this.username);
-      this.$store.dispatch("login", this.username, this.password);
+      console.log(this.email);
+      const user = {
+        email: this.email,
+        password: this.password,
+      };
+      this.$store.dispatch("login", user);
 
       // dispatch action to store
     },
