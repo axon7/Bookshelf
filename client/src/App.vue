@@ -4,12 +4,28 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/reading-list">Reading list</router-link> |
       <router-link to="/finished-books">Finished books</router-link> |
-      <router-link to="/login">Login</router-link> |
-      <router-link to="/register">Register</router-link> |
+
+      <div v-if="isAuthenticated">
+        IS authenticated
+        <router-link to="/login">Logout</router-link> |
+      </div>
+      <div v-else>
+        <router-link to="/login">Login</router-link> |
+        <router-link to="/register">Register</router-link> |
+      </div>
     </div>
     <router-view />
   </div>
 </template>
+<script>
+export default {
+  computed: {
+    isAuthenticated() {
+      return this.$store.state.auth.authenticated;
+    },
+  },
+};
+</script>
 
 <style>
 #app {
