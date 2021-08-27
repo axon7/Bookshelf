@@ -1,5 +1,12 @@
 <template>
-  <p>Strona książki</p>
+  <div>
+    <img :src="book.imageLinks?.thumbnail" />
+    <p>{{ book.title }}</p>
+    <p>
+      Add to reading list
+      <font-awesome-icon :icon="['fas', 'plus']" />
+    </p>
+  </div>
 </template>
 
 <script>
