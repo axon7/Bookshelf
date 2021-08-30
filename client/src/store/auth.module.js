@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import router from "../router/index";
 export const auth = {
   state: {
     user: {},
@@ -31,11 +31,19 @@ export const auth = {
           localStorage.setItem("token", token);
           // Set the axios defaults
           axios.defaults.headers.common["Authorization"] = token;
+
+          router.push("/");
         }
       } catch (err) {
         console.log("error");
         commit("login_error", err);
       }
+    },
+
+    logout({ commit }) {
+      localStorage.removeItem("token");
+      delete axios.defaults.headers.common["Authorization"];
+      commit("logout");
     },
   },
   mutations: {
@@ -53,6 +61,12 @@ export const auth = {
     },
     login_error(state, err) {
       state.error = err;
+    },
+    logout(state) {
+      state.authenticated = false;
+      state.user = "";
+      state.token = "";
+      state.status = "";
     },
   },
 };

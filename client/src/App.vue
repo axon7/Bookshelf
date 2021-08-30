@@ -3,15 +3,16 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/reading-list">Reading list</router-link> |
-      <router-link to="/finished-books">Finished books</router-link> |
-
-      <div v-if="isAuthenticated">
-        IS authenticated
-        <router-link to="/login">Logout</router-link> |
-      </div>
-      <div v-else>
-        <router-link to="/login">Login</router-link> |
-        <router-link to="/register">Register</router-link> |
+      <router-link to="/finished-books">Finished books</router-link>
+      <div>
+        <template v-if="isAuthenticated">
+          Welcome, {{ user.username }}!
+          <router-link to="/login" @click="logout">Logout</router-link>
+        </template>
+        <template v-else>
+          <router-link to="/login">Login</router-link> |
+          <router-link to="/register">Register</router-link>
+        </template>
       </div>
     </div>
     <router-view />
@@ -22,6 +23,14 @@ export default {
   computed: {
     isAuthenticated() {
       return this.$store.state.auth.authenticated;
+    },
+    user() {
+      return this.$store.state.auth.user;
+    },
+  },
+  methods: {
+    logout() {
+      return this.$store.dispatch("logout");
     },
   },
 };
