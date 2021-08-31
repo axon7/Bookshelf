@@ -6,7 +6,7 @@
       <router-link to="/finished-books">Finished books</router-link>
       <div>
         <template v-if="isAuthenticated">
-          Welcome, {{ user.username }}!
+          You are logged in
           <router-link to="/login" @click="logout">Logout</router-link>
         </template>
         <template v-else>

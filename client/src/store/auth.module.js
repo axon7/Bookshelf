@@ -3,8 +3,9 @@ import router from "../router/index";
 export const auth = {
   state: {
     user: {},
-    authenticated: false,
+    authenticated: !!localStorage.getItem("token"),
     status: "",
+    token: localStorage.getItem("token") || "",
   },
   actions: {
     async login({ commit }, user) {
