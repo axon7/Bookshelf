@@ -2,6 +2,7 @@
   <div class="home">
     <Search :method="search" />
     <BookList :books="books" />
+    <nav-link url="google.pl"></nav-link>
   </div>
 </template>
 
@@ -9,9 +10,10 @@
 import Search from "@/components/Search.vue";
 import BookList from "@/components/BookList.vue";
 import axios from "axios";
+import NavLink from "@/components/NavLink.vue";
 export default {
   name: "Home",
-  components: { Search, BookList },
+  components: { Search, BookList, NavLink },
   data() {
     return {
       books: [],
