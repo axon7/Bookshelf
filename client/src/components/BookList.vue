@@ -1,26 +1,31 @@
 <template>
   <div class="books-container" v-if="books.length > 0">
-    <router-link
-      class="book-card"
-      :to="{ name: 'BookView', params: { id: book.id } }"
-      v-for="book in books"
-      :key="book.id"
-    >
-      <img :src="book.volumeInfo.imageLinks?.thumbnail" />
-      <div class="book-info">
-        <p class="title">{{ book.volumeInfo.title }}</p>
-        <div>
-          <span
-            class="author"
-            v-for="author in book.volumeInfo.authors"
-            :key="author"
-          >
-            {{ author }}
-          </span>
+    <div class="card-wrapper" v-for="book in books" :key="book.id">
+      <router-link
+        class="book-card"
+        :to="{ name: 'BookView', params: { id: book.id } }"
+      >
+        <img :src="book.volumeInfo.imageLinks?.thumbnail" />
+        <div class="book-info">
+          <p class="title">{{ book.volumeInfo.title }}</p>
+          <div>
+            <span
+              class="author"
+              v-for="author in book.volumeInfo.authors"
+              :key="author"
+            >
+              {{ author }}
+            </span>
+          </div>
+          <p class="description">{{ book.volumeInfo.description }}</p>
         </div>
-        <p class="description">{{ book.volumeInfo.description }}</p>
+      </router-link>
+      <div @click="console.log('hi')" class="add-btn">
+        <button alt="add to reading list">
+          <font-awesome-icon icon="plus" />
+        </button>
       </div>
-    </router-link>
+    </div>
   </div>
 </template>
 
@@ -44,6 +49,10 @@ export default {
   width: 100%;
 }
 
+.card-wrapper {
+  position: relative;
+}
+
 .book-card {
   display: flex;
   align-items: flex-start;
@@ -56,11 +65,42 @@ export default {
   color: black;
 }
 
+.add-btn {
+  margin-left: 20px;
+  position: absolute;
+  top: 0;
+  right: -20px;
+  color: rgb(111, 112, 119);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
+  z-index: 3;
+
+  button {
+    border-radius: 30px;
+    padding: 0px;
+    width: 40px;
+    height: 40px;
+    line-height: 1;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    background: white;
+    color: green;
+    border: 1px solid rgb(241, 241, 244);
+    cursor: pointer;
+  }
+}
+
 .book-info {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   margin-left: 20px;
+  margin-right: 20px;
 }
 
 .title {
