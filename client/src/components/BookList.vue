@@ -20,8 +20,8 @@
           <p class="description">{{ book.volumeInfo.description }}</p>
         </div>
       </router-link>
-      <div @click="console.log('hi')" class="add-btn">
-        <button alt="add to reading list">
+      <div class="add-btn">
+        <button @click="addBook" alt="add to reading list">
           <font-awesome-icon icon="plus" />
         </button>
       </div>
@@ -36,6 +36,11 @@ export default {
     books: {
       type: Array,
       default: () => [],
+    },
+  },
+  methods: {
+    addBook() {
+      console.log("added book");
     },
   },
 };
