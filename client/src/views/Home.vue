@@ -35,3 +35,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.home {
+  margin-right: 40px;
+}
+</style>
