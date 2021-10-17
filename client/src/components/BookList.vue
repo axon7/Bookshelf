@@ -21,7 +21,7 @@
         </div>
       </router-link>
       <div class="add-btn">
-        <button @click="addBook" alt="add to reading list">
+        <button @click="addBook(book)" alt="add to reading list">
           <font-awesome-icon icon="plus" />
         </button>
       </div>
@@ -39,8 +39,19 @@ export default {
     },
   },
   methods: {
-    addBook() {
-      console.log("added book");
+    addBook(book) {
+      console.log(book.volumeInfo.title);
+
+      const bookObj = {
+        id: book.id,
+        title: book.volumeInfo.title,
+        author: book.volumeInfo.authors,
+        imgPath: book.volumeInfo.imageLinks?.thumbnail,
+        user: 1,
+        addedToReadingList: true,
+        isFinished: false,
+      };
+      this.$store.dispatch("addBook", bookObj);
     },
   },
 };
