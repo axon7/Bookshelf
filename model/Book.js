@@ -5,16 +5,9 @@ const BookSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  title: {
-    type: String,
+  volumeInfo: {
+    type: Object,
     required: true,
-  },
-  author: {
-    type: Array,
-    required: true,
-  },
-  imgPath: {
-    type: String,
   },
   user: {
     type: Number,

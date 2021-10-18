@@ -5,13 +5,11 @@ export const book = {
     async addBook({ commit }, book) {
       try {
         await axios.post("/api/book/add", {
-          title: book.title,
           _id: book.id,
-          imgPath: book.imgPath,
           user: book.user,
           addedToReadingList: book.addedToReadingList,
           isFinished: book.isFinished,
-          author: book.author,
+          volumeInfo: book.volumeInfo,
         });
       } catch (err) {
         console.log("error");

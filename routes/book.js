@@ -8,23 +8,13 @@ require("dotenv").config();
 
 router.post("/add", async (req, res) => {
   try {
-    const {
-      title,
-      _id,
-      imgPath,
-      user,
-      addedToReadingList,
-      isFinished,
-      author,
-    } = req.body;
+    const { _id, user, addedToReadingList, isFinished, volumeInfo } = req.body;
     const book = new Book({
-      title,
       _id,
-      imgPath,
+      volumeInfo,
       user,
       addedToReadingList,
       isFinished,
-      author,
     });
 
     // TODO if book exists then only change status

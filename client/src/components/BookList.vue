@@ -1,9 +1,9 @@
 <template>
   <div class="books-container" v-if="books.length > 0">
-    <div class="card-wrapper" v-for="book in books" :key="book.id">
+    <div class="card-wrapper" v-for="book in books" :key="book.id || book._id">
       <router-link
         class="book-card"
-        :to="{ name: 'BookView', params: { id: book.id } }"
+        :to="{ name: 'BookView', params: { id: book.id || book._id } }"
       >
         <img :src="book.volumeInfo.imageLinks?.thumbnail" />
         <div class="book-info">
@@ -17,7 +17,7 @@
               {{ author }}
             </span>
           </div>
-          <p class="description">{{ book.volumeInfo.description }}</p>
+          <p class="description">{{ book.volumeInfo?.description }}</p>
         </div>
       </router-link>
       <div class="add-btn">
@@ -40,16 +40,17 @@ export default {
   },
   methods: {
     addBook(book) {
-      console.log(book.volumeInfo.title);
-
+      console.log(book);
       const bookObj = {
         id: book.id,
-        title: book.volumeInfo.title,
-        author: book.volumeInfo.authors,
-        imgPath: book.volumeInfo.imageLinks?.thumbnail,
         user: 1,
         addedToReadingList: true,
         isFinished: false,
+        volumeInfo: {
+          title: book.volumeInfo.title,
+          author: book.volumeInfo.authors,
+          imgPath: book.volumeInfo.imageLinks.thumbnail,
+        },
       };
       this.$store.dispatch("addBook", bookObj);
     },
