@@ -46,11 +46,7 @@ export default {
         user: 1,
         addedToReadingList: true,
         isFinished: false,
-        volumeInfo: {
-          title: book.volumeInfo.title,
-          author: book.volumeInfo.authors,
-          imgPath: book.volumeInfo.imageLinks.thumbnail,
-        },
+        volumeInfo: book.volumeInfo,
       };
       this.$store.dispatch("addBook", bookObj);
     },

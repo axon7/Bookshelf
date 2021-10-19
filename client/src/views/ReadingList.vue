@@ -1,6 +1,8 @@
 <template>
-  <p>Reading List</p>
-  <BookList :books="books" />
+  <div class="wrapper">
+    <p>Reading List</p>
+    <BookList :books="books" />
+  </div>
 </template>
 
 <script>
@@ -25,4 +27,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.wrapper {
+  margin-right: 40px;
+}
+</style>
