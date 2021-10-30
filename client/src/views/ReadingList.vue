@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <p>Reading List</p>
-    <BookList :books="books" />
+    <BookList @remove="removeFromList" :books="books" />
   </div>
 </template>
 
@@ -15,6 +15,11 @@ export default {
     return {
       books: [],
     };
+  },
+  methods: {
+    removeFromList(index) {
+      this.books.splice(index, 1);
+    },
   },
   async created() {
     let res = await axios.get("/api/book/reading-list", {

@@ -1,6 +1,10 @@
 <template>
   <div class="books-container" v-if="books.length > 0">
-    <div class="card-wrapper" v-for="book in books" :key="book.id || book._id">
+    <div
+      class="card-wrapper"
+      v-for="(book, index) in books"
+      :key="book.id || book._id"
+    >
       <router-link
         class="book-card"
         :to="{ name: 'BookView', params: { id: book.id || book._id } }"
@@ -27,7 +31,7 @@
       </div>
       <div v-else-if="book.addedToReadingList" class="btn remove">
         <button
-          @click="removeBookFromReadingList(book)"
+          @click="removeBookFromReadingList(book, index)"
           alt="add to reading list"
         >
           <font-awesome-icon icon="minus" />
@@ -58,7 +62,8 @@ export default {
       };
       this.$store.dispatch("addBook", bookObj);
     },
-    removeBookFromReadingList(book) {
+    removeBookFromReadingList(book, index) {
+      this.$emit("remove", index);
       const bookObj = {
         id: book._id,
         user: 1,
