@@ -25,11 +25,29 @@ router.post("/add", async (req, res) => {
   }
 });
 
+router.post("/remove-from-reading-list", async (req, res) => {
+  try {
+    const { _id, user } = req.body;
+    console.log(_id);
+    console.log(user);
+    console.log("req remove");
+    await Book.findOneAndUpdate(
+      { user: user, _id: _id },
+      { addedToReadingList: false }
+    );
+  } catch (err) {
+    res.status(400).json({ err: err });
+  }
+});
+
 router.get("/reading-list", async (req, res) => {
   const { userId } = req.query;
   // console.log(userId);
   try {
-    const readingList = await Book.find({ user: userId }).exec();
+    const readingList = await Book.find({
+      user: 1,
+      addedToReadingList: true,
+    }).exec();
     res.json(readingList);
   } catch (err) {
     res.status(400).json({ err: err });

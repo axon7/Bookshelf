@@ -20,9 +20,17 @@
           <p class="description">{{ book.volumeInfo?.description }}</p>
         </div>
       </router-link>
-      <div class="add-btn">
+      <div v-if="!book.addedToReadingList" class="btn">
         <button @click="addBook(book)" alt="add to reading list">
           <font-awesome-icon icon="plus" />
+        </button>
+      </div>
+      <div v-else-if="book.addedToReadingList" class="btn remove">
+        <button
+          @click="removeBookFromReadingList(book)"
+          alt="add to reading list"
+        >
+          <font-awesome-icon icon="minus" />
         </button>
       </div>
     </div>
@@ -49,6 +57,13 @@ export default {
         volumeInfo: book.volumeInfo,
       };
       this.$store.dispatch("addBook", bookObj);
+    },
+    removeBookFromReadingList(book) {
+      const bookObj = {
+        id: book._id,
+        user: 1,
+      };
+      this.$store.dispatch("removeBookFromReadingList", bookObj);
     },
   },
 };
@@ -78,7 +93,7 @@ export default {
   color: black;
 }
 
-.add-btn {
+.btn {
   margin-left: 20px;
   position: absolute;
   top: 0;
@@ -105,6 +120,12 @@ export default {
     color: green;
     border: 1px solid rgb(241, 241, 244);
     cursor: pointer;
+  }
+
+  &.remove {
+    button {
+      color: red;
+    }
   }
 }
 
