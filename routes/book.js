@@ -19,7 +19,9 @@ router.post("/add", async (req, res) => {
 
     // TODO if book exists then only change status
 
-    book.save().then((data) => console.log(data));
+    const addedBook = await book.save();
+
+    res.status(200).json(addedBook);
   } catch (err) {
     res.status(400).json({ err: err });
   }
@@ -31,10 +33,12 @@ router.post("/remove-from-reading-list", async (req, res) => {
     console.log(_id);
     console.log(user);
     console.log("req remove");
-    await Book.findOneAndUpdate(
+    const updatedBook = await Book.findOneAndUpdate(
       { user: user, _id: _id },
       { addedToReadingList: false }
     );
+
+    res.status(200).json(updatedBook);
   } catch (err) {
     res.status(400).json({ err: err });
   }
